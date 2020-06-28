@@ -1,0 +1,135 @@
+参考：https://www.runoob.com/mongodb/mongodb-tutorial.html
+
+几个概念：
+    数据库  database   一个数据库可以有N个集合
+    集合  collection   一个集合中可以有N个文档
+    文档  document
+============================================================= 数据库操作的基本命令
+基本入门命令：
+    数据库：
+        show dbs   表示看服务器都有哪些数据库
+        db  表示处于哪个数据库  如：
+                C:\Users\Administrator>mongo
+                MongoDB shell version: 3.2.7
+                connecting to: test
+                > show dbs     # 查看都有哪些数据库
+                local  0.000GB
+                > use local    # local存在  表示选中这个数据库 
+                switched to db local
+                > db     # db就表示你上面的选中的数据库 
+                local
+        use dbname   使用/创建 一个数据库 
+            如果数据库已存在  表示选中这个数据库   db就代表这个数据库
+            如果数据库不存在  表示创建这个数据库  创建完后，你需要给里面插入集合，如果不插入，就不会创建
+            > show dbs
+            local  0.000GB
+            > use students   # 由上students数据库并不存在   此use表示创建students数据库
+            switched to db students
+            > db  # 创建OK后，db就表示当前的数据库
+            students
+            > db.createCollection("score");  # 在数据库中创建score这个集合  只有集合创建OK了 数据库才存在了
+            { "ok" : 1 }
+            > show dbs  # 此时students这个数据库就创建OK了
+            local     0.000GB
+            students  0.000GB
+            >
+        db.dropDatabase()   删除某一个数据库   
+            > db
+            students
+            > db.dropDatabase()  # 删除当前的数据库 （小心操作）
+            { "dropped" : "students", "ok" : 1 }
+            > show dbs
+            local  0.000GB
+            >
+
+============================================================= 集合操作的基本命令
+    集合：在一个数据库可以存在一个或多个集合
+        db.createCollection("集合名")   创建集合
+        show collections  查看当前数据库都有哪些集合 ，如下：
+            > show dbs
+            local  0.000GB
+            > use blog    # 创建数据库 blog
+            switched to db blog
+            > db.createCollection("article")  # 在blog数据库创建集合 articel 
+            { "ok" : 1 }
+            > db.createCollection("cat")  # 在blog数据库创建集合 cat
+            { "ok" : 1 }
+            > show collections  # 查看当前数据库都有哪些集合
+            article
+            cat
+            > 
+        db.集合名.drop()  删除集合：
+            > db.cat.drop();  # 删除集合 （只要是删除操作一定要慎重）
+            true
+            > show collections
+            article
+            >  
+
+
+============================================================= 文档操作的基本命令
+    文档 ： 在一个集合中可以存很多访文档  一个文档就是一个JSON
+
+    db.集合名.find()   查看某个集合中所有的文档
+        > db.article.find()  # 没有打印出结果  表示你当前的集合中没有任何的文档
+        >
+        >     
+    db.集合名.insert()   向某个集合中插入文档
+        > db.article.insert({username:"wangcai",age:100});  # 向集合中插入文档
+        WriteResult({ "nInserted" : 1 })
+        > db.article.find()  # 查看集合中所有的文档  插入时mongodb会给你添加一个唯一标识符 全球唯一
+        { "_id" : ObjectId("5e7963e4e3fc7b47d907197c"), "username" : "wangcai", "age" : 100 }
+        >  
+    db.集合名.update()   更新某个集合中的某个文档
+        > db.article.find()
+        { "_id" : ObjectId("5e7963e4e3fc7b47d907197c"), "username" : "wangcai", "age" : 100 }
+        > db.article.update({"username":"wangcai"},{age:666})  # 第1个参数表示条件 第2个参数是你要更新成什么
+        WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+        > db.article.find() # 查看集合中所有的文档
+        { "_id" : ObjectId("5e7963e4e3fc7b47d907197c"), "age" : 666 }
+        >   
+    db.集合名.remove()   把集合中的某个文档给删除掉
+        > show dbs
+        local  0.000GB
+        > use blog
+        switched to db blog
+        > db.createCollection("article")
+        { "ok" : 1 }
+        > db.article.insert({username:"wangcai",age:100});
+        WriteResult({ "nInserted" : 1 })
+        > db.article.find()
+        { "_id" : ObjectId("5e79657ce3fc7b47d907197d"), "username" : "wangcai", "age" : 100 }
+        > db.article.remove({username:"wangcai"})
+        WriteResult({ "nRemoved" : 1 })
+        > db.article.find()
+        > 
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

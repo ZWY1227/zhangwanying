@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点餐系统简化版</title>
+    <style>
+        .cook {
+            width: 400px;
+            height: 400px;
+            background-color: #ccc;
+            margin: 50px auto;
+            padding: 100px;
+        }
+
+        input {
+            outline: none;
+            height: 25px;
+            width: 180px;
+        }
+
+        .cook h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .cook p {
+            width: 100%;
+            color: #333;
+            font-size: 16px;
+            margin: 50px 0;
+        }
+
+        .cook p:nth-child(4) {
+            text-align: center;
+        }
+
+        .cook p:nth-child(4) #btn {
+            width: 100px;
+            height: 50px;
+            color: #fff;
+            font-size: 20px;
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cook">
+        <h1>点餐系统</h1>
+        <p>
+            请输入你的会员名/手机号：
+            <input type="text" name="phone">
+        </p>
+        <p>请您输入你想要点的菜名：
+            <input type="text" name="cooker">
+        </p>
+        <p>
+            <input type="submit" value="确定" id="btn">
+        </p>
+        <a href="./allorder">点击所有查看所有订单详情</a>
+    </div>
+</body>
+<script src="/jquery1.11.3.js"></script>
+<!-- 因为采用了静态资源托管,托管的是public下面的所有内容包括jquery,所以不需要写前面的./public了这里直接引入文件就ok了 -->
+</html>
+<script>
+    // 当点击按钮的时候触发点击事件,我们拿到两个input框里面的值
+    $("#btn").click(function(){
+        let phone=$("input[name=phone]").val()
+        let cooker=$("input[name=cooker]").val()
+        let dat={
+            phone:phone,
+            cooker:cooker
+        }
+        // 使用ajax发送post请求数据发送到/save,
+        //传给浏览器的数据就是通过查询字符串送过去的通过body-parse接收
+        $.post("/save",dat,function(data){
+            // 回调函数,当后台返回1触发,证明接口跑通了,这里提示请求成功,否则就是失败了
+            if(data==1){
+                alert("请求接口成功")
+            }else{
+                alert("请求接口失败")
+            }
+        })
+    })
+</script>

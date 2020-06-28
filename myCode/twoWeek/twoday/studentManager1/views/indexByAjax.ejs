@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务端渲染</title>
+    <script src="/jquery1.11.3.js"></script>
+    <script src="/underscore.min.js"></script>
+    <style>
+        table {
+            width: 500px;
+            height: 200px;
+            border: 1px solid rgb(122, 79, 87);
+            margin: 20px auto;
+        }
+
+        table th {
+            background-color: rgb(68, 103, 117);
+        }
+
+        table th,
+        table td {
+            border: 1px solid rgb(122, 79, 87);
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>渲染的学生列表</h1>
+    <table id="table">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>籍贯</th>
+        </tr>
+    </table>
+</body>
+
+</html>
+<script type="text/template" id="template">
+    <tr>
+        <td>%%= name %%</td>
+        <td>%%= age %%</td>
+        <td>%%= sex %%</td>
+        <td>%%= provice %%</td>
+    </tr>
+</script>
+<script>
+    let templateHtml = $("#template").html()
+    var compiler = _.template(templateHtml)
+    $.get("/allstudent", function (data) {
+        // console.log(data)
+        _.each(data.allStudent, function (item) {
+            var str = compiler({
+                "name": item.name,
+                "age": item.age,
+                "sex": item.sex,
+                "provice": item.provice
+            })
+            // console.log(str)
+            $("#table").append(str)
+        })
+
+    })
+
+
+</script>

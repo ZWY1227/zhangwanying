@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单详情</title>
+    <style>
+        .box {
+            width: 350px;
+            height: 350px;
+            background-color: rgb(187, 156, 161);
+            color: #333;
+            margin: 200px auto;
+            padding: 40px;
+            border-radius: 20px;
+        }
+        h3 span{
+            color: #000;
+            font-weight: 700;
+            font-size: 24px;
+            margin: 0 10px;
+            color: rgb(75, 94, 39);
+        }
+        li{
+            text-align: left;
+            margin:10px 0;
+            color:rgb(75, 94, 39);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <a href="/allorder">查看订单列表</a>
+        <h3>尊敬的 <span><%= phone%></span>用户：</h3>
+        <h5>您的订单记录如下哦！</h5>
+        <ol>
+            <li><%= cook%></li>
+        </ol>
+    </div>
+</body>
+</html>

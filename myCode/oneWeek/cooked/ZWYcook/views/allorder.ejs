@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        所有订单
+    </title>
+    <style>
+        .box {
+            width: 350px;
+            height: 350px;
+            background-color: rgb(187, 156, 161);
+            color: #333;
+            margin: 200px auto;
+            padding: 40px;
+            border-radius: 20px;
+        }
+        ul{
+            list-style: none;
+            text-align: left;
+            height: 290px;
+            overflow: scroll;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        h3{
+            text-align: center;
+        }
+        li{
+            margin-top:20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        li a{
+            text-decoration: none;
+            color: silver;
+            font-size: 20px;
+          
+        }
+       li a:hover{
+            color: #333;
+            
+        }
+        .fh{
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+<a href="/" class="fh">返回点餐入口</a>
+        <h3>所有订单如下：</h3>
+        <ul>
+            <% for(let i=0;i<all.length;i++){ %>
+                <li><a href="/order/<%= all[i]%>"><%= all[i]%></a></li>
+            <% } %>
+        </ul>
+        
+    </div>
+</body>
+
+</html>

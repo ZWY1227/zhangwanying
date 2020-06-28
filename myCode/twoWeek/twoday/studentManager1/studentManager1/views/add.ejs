@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加一个新学生</title>
+    <script src="/jquery1.11.3.js"></script>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin: 30px;
+        }
+        input{
+            height: 20px;
+        }
+
+        #btn {
+            width: 150px;
+            height: 25px;
+            margin-left: 55px;
+            background-color: rgb(110, 120, 204);
+            color: #fff;
+        }
+
+        .box {
+            width: 400px;
+            height: 400px;
+            margin: 170px auto;
+            border: 1px solid;
+            padding:40px;
+            background-color: rgb(68, 103, 117);
+        }
+        a{
+            text-decoration: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+
+       <a href="/byejs" >返回查看所有学生</a> </br><h1 style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;添加新学生</h1>
+
+        <div>
+            <ul>
+                <li>
+                    <label for="">姓名：</label>
+                    <input type="text" name="name" id="name">
+                </li>
+                <li>
+                    <label for="">年龄：</label>
+                    <input type="text" name="age" id="age">
+                </li>
+                <li>
+                    性别：
+                    <input type="radio" name="sex" value="男">男
+                    <input type="radio" name="sex" value="女">女
+                </li>
+                <li>
+                    <label for="">籍贯：</label>
+                    <input type="text" name="provice" id="provice">
+                </li>
+                <li>
+                    <input type="button" value="添加" id="btn">
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $("#btn").click(function () {
+        let dat = {
+            "name": $("#name").val(),
+            "age": $("#age").val(),
+            "sex": $("input[name=sex]:checked").val(),
+            "provice": $("#provice").val()
+        }
+        //  console.log(dat)
+        $.post("/add", dat, function (data) {
+            if (data == "-1") {
+                console.log("失败")
+            } else {
+                console.log("成功")
+            }
+
+        })
+    })
+
+
+
+
+</script>

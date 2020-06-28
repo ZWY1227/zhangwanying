@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务端渲染</title>
+    <style>
+        table{
+            width: 500px;
+            height: 200px;
+            border: 1px solid rgb(122, 79, 87);
+            margin: 20px auto;
+        }
+        table th{
+            background-color: rgb(68, 103, 117);
+        }
+        table th, table td{
+            border: 1px solid rgb(122, 79, 87);
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>学生列表，服务端渲染的</h1>
+    <h2><a href="/add">添加学生信息</a></h2>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>籍贯</th>
+        </tr>
+        <% for(let i=0;i<arr.length;i++){ %>
+            <tr>
+                <td><%= arr[i].name%></td>
+                <td><%= arr[i].age%></td>
+                <td><%= arr[i].sex%></td>
+                <td><%= arr[i].provice%></td>
+            </tr>
+        <% }%>
+        
+   
+    </table>
+</body>
+</html>

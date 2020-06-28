@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>服务端渲染</title>
+    <style>
+        table {
+            width: 500px;
+            height: 200px;
+            border: 1px solid red;
+            margin: 20px auto;
+        }
+
+        table th {
+            background-color: skyblue;
+        }
+
+        table th,
+        table td {
+            border: 1px solid red;
+            text-align: center;
+        }
+
+        h1,h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>学生列表(ajax去请求数据，浏览器自己渲染数据)</h1>
+    <h3><a href="/add">[增加新学生]</a></h3>
+    <table id="box">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>籍贯</th>
+        </tr>
+
+    </table>
+</body>
+<!-- 可能和ejs 模板引擎中的<%= %> 冲突了  可以把下面的代码当成ejs的模板 -->
+<script type="text/template" id="mytemplate">
+    <tr>
+        <td>%%= name %%</td>
+        <td>%%= age %%</td>
+        <td>%%= sex %%</td>
+        <td>%%= provice %%</td>
+    </tr>
+</script>
+<script src="/js/jquery1.11.3.js"></script>
+<script src="/js/underscore.min.js"></script>
+<script>
+    /* 
+        接口地址：/allstudent
+        请求方式：get
+        是否传参：否
+        返回数据：
+            xxx
+    */
+    let templateHtml = $("#mytemplate").html();
+    // console.log(templateHtml);
+    var compiler = _.template(templateHtml);
+    // console.log(compiler)
+
+    // 页面中的ajax它又向localhost:3000发出请求，此时是在同一个域名下面，是没有跨域问题
+    // ajax还没有系统学习 同域 没有跨域问题
+    // 如果这个页面不是localhost:3000渲染的，此时ajax去请求localhost:3000就会产生跨域问题
+    $.get("/allstudent", function (data) {  // data就是服务器返回给ajax的数据
+        console.log(data.results)
+        _.each(data.results,function(item){
+            // console.log(item)
+            var str = compiler({
+                "name":item.name,
+                "age":item.age,
+                "sex":item.sex,
+                "provice":item.provice,
+            })
+            console.log(str)
+            $("#box").append(str)
+        })
+    });
+   
+
+
+    /*
+       有一个比较好的工具：http://www.underscore-js.com/
+       Underscore一个JavaScript实用库，提供了一整套函数式编程的实用功能，但是没有扩展任何JavaScript内置对象。
+
+       就是一堆的api，直接去使用就OK。
+
+
+
+     */
+</script>
+
+</html>

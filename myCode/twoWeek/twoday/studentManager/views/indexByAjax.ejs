@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务端渲染</title>
+    <script src="/jquery1.11.3.js"></script>
+    <style>
+        table{
+            width: 500px;
+            height: 200px;
+            border: 1px solid rgb(122, 79, 87);
+            margin: 20px auto;
+        }
+        table th{
+            background-color: rgb(68, 103, 117);
+        }
+        table th, table td{
+            border: 1px solid rgb(122, 79, 87);
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>学生列表，服务端渲染的</h1>
+    <table id="table">
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>籍贯</th>
+        </tr>
+
+       
+    </table>
+</body>
+</html>
+
+<script>
+      /* 
+        接口地址：/allstudent
+        请求方式：get
+        是否传参：否
+        返回数据：
+            xxx
+    */
+
+    $.get("/allstudent",function(data){
+    console.log(data.results)
+    let str=""
+    for(let i=0;i<data.results.length;i++){
+        str+="<tr>"+
+        "<td>"+data.results[i].name+"</td>"+
+        "<td>"+data.results[i].age+"</td>"+
+        "<td>"+data.results[i].sex+"</td>"+
+        "<td>"+data.results[i].provice+"</td>"+
+        "</tr>"
+    }
+    $("#table").append(str) 
+})
+
+
+
+</script>

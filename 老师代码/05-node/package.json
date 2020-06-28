@@ -1,0 +1,18 @@
+{
+  "name": "05-node",
+  "version": "1.0.0",
+  "description": "客户端与服务器的交互模型\r     客户端：可以向服务器发出请求，接收服务器的响应并作出处理。\r         如：浏览器，App，PC端的软件\r     服务器端：能够接收客户端，并把资源返回给客户端。\r         web服务器：提供web服务，网页服务器\r         数据库服务器：提供数据服务的\r         资源服务器：图片，视频...\r         ....",
+  "main": "01-初识node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "ejs": "^3.0.1"
+  }
+}

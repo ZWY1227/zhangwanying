@@ -1,0 +1,22 @@
+{
+    "name":"myapp",
+    "item":[
+        {
+            "name":"css",
+            "type":"dir"
+        },
+        {
+            "name":"js",
+            "type":"dir"
+        },
+        {   
+            "name":"imgs",
+            "type":"dir"
+        },
+        {
+            "name":"index.html",
+            "type":"file",
+            "content":"<!DOCTYPE html>\n<html>\n<head>\n<meta charset='UTF-8'>\n<title>Document</title>\n</head>\n<body>\n\n</body>\n</html>"
+        }
+    ]
+}
